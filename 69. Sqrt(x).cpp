@@ -1,36 +1,57 @@
 // Given a non-negative integer x, compute and return the square root of x.
 
-// Since the return type is an integer, the decimal digits are truncated, and only the integer part of the result is returned.
 
-// Note: You are not allowed to use any built-in exponent function or operator, such as pow(x, 0.5) or x ** 0.5.
+// Given a non-negative integer x, compute and return the square root of x.
 
+#include <iostream>
+using namespace std;
 
-class Solution {
-public:
-    int binary_search(int n){
-        long int ans;
-        int s=0;
-        int e=n;
-        long int mid = s+(e-s)/2;
-        while(s<=e)
+long int sqrtInt(int n) {
+    long int ans;
+    int s = 0;
+    int e = n;
+    long int mid = s + (e - s) / 2;
+    while (s <= e)
+    {
+        if (mid * mid == n)
+            return mid;
+
+        if (mid * mid > n)
+            e = mid - 1;
+
+        else
         {
-            if(mid*mid == n)
-                return mid;
-            
-            if(mid*mid > n)
-                e=mid-1;
-
-            else
-            {
-                s=mid+1;
-                ans = mid;
-            }
-            mid = s + (e-s)/2;
+            s = mid + 1;
+            ans = mid;
         }
-        return ans;
+        mid = s + (e - s) / 2;
     }
-    
-    int mySqrt(int x) {
-        return binary_search(x);
+    return ans;
+}
+
+double morePrecision(int n, int precision, int tempSoln)
+{
+    double factor = 1;
+    double ans = tempSoln;
+    for (int i = 0; i < precision; i++)
+    {
+        factor = factor / 10;
+        for (double j = ans; j * j < n; j = j + factor)
+        {
+            ans = j;
+        }
     }
-};
+    return ans;
+
+}
+
+int main()
+{
+    int x;
+    cin >> x;
+
+    int tempSol = sqrtInt(x);
+    cout << "Square root of element is " << morePrecision(x, 10, tempSol) << endl;
+
+    return 0;
+}
