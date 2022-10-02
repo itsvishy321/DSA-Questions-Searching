@@ -1,7 +1,7 @@
 /*
 
     for an array A
-->  Ai representsnumber of pages in the ith book
+->  Ai represents number of pages in the ith book
 ->  We need to allocate books to m number of students such that :
 
     1) each student get atleast 1 book
